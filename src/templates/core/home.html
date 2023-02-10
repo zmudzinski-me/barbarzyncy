@@ -1,0 +1,383 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{{ site_url }}"><b>BARBARZYŃCY</b></a>
+            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-end">
+                <a class="navbar-item" href="#home"><b>Główna</b></a>
+                <a class="navbar-item" href="#blog"><b>Aktualności</b></a>
+                <a class="navbar-item" href="#progress"><b>Progres PvE</b></a>
+                <a class="navbar-item" href="#groups"><b>Grupy</b></a>
+                <a class="navbar-item" href="#recruitment"><b>Rekrutacja</b></a>
+                <a class="navbar-item" href="#contact"><b>Kontakt</b></a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<section class="hero bottom-shadow is-medium is-fixed" style="background: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.8)), url('{% static '/img/cover.png' %}') center center; background-size:cover;">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <div class="block mb-6">
+                <img src="{% static '/img/logo.png' %}" />
+            </div>
+            <div class="block">
+                {% for item in social %}
+                <a href="{{ item.link }}" target="_blank" class="button {{ item.color }}">
+                    <span class="icon">
+                        <i class="{{ item.icon }}"></i>
+                    </span>
+                </a>
+                {% endfor %}
+                <a href="#recruitment" class="button is-horde">
+                    <span class="icon">
+                        <i class="fa-solid fa-file-lines"></i>
+                    </span>
+                    <span>Rekrutacja</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div id="blog" class="hero is-medium">
+        <div class="container has-text-centered">
+            <div class="hero-body">
+                <h1 class="title">Aktualności</h1>
+                <h2 class="subtitle is-6">Co u Barbarzyńców piszczy...</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        {% if banner %}
+            <article class="message is-dark">
+                <div class="message-header" style="border-radius: 0px; border: 1px solid #f7b10a;">
+                    <div>
+                        <h1 class="title is-5">{{ banner.title }}</h1>
+                        <h2 class="subtitle is-6">{{ banner.description }}</h2>
+                    </div>
+                    <a href="{{ banner.link }}" target="_blank" class="button is-horde">
+                        <span>Przejdź</span>
+                    </a>
+                </div>
+            </article>
+        {% endif %}
+        {% if blog %}
+            <div class="columns is-centered  has-text-centered">
+            {% for post in blog %}
+                <div class="column is-one-third">
+                    <a href="/blog/{{ post.id }}/">
+                        <div class="card" style="height: 100%;">
+                            <div class="card-image">
+                                <figure class="image">
+                                    <img src="{{ post.image.url }}"  style="height: 250px">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <div class="block has-text-centered">
+                                    <h1 class="title is-5">{{ post.title }}</h1>
+                                    <h2 class="subtitle is-6">{{  post.published_at|date:"d E Y" }}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {%  endfor %}
+            </div>
+            <div class="mt-6 has-text-centered">
+                <a href="/blog/" class="button is-horde">Przeczytaj więcej</a>
+            </div>
+        {%  endif %}
+    </div>
+</section>
+
+<section>
+    <div id="progress" class="hero is-medium">
+        <div class="container has-text-centered">
+            <div class="hero-body">
+                <h1 class="title">Progres PVE</h1>
+                <h2 class="subtitle is-6">Padło pod naszym toporem.</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container has-text-centered">
+        {% if progress %}
+        <div class="columns is-centered">
+            {% for raid in progress %}
+            <div class="column is-one-quarter">
+                <div class="card" style="height: 100%;">
+                    <div class="card-image">
+                        <figure class="image">
+                            {% if raid.image %}
+                            <img src="{{ raid.image }}" alt="{{ raid.name }}" style="height: 159px">
+                            {% else %}
+                            <img src="{% static '/img/progress_thumbnail.png' %}">
+                            {% endif %}
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <div class="block has-text-centered	">
+                                <h1 class="title is-6">{{ raid.name }}</h1>
+                            </div>
+
+                            <div class="block">
+                                <span>
+                                    <div class="columns">
+                                        <div class="column has-text-left">Normal</div>
+                                        <div class="column has-text-right">{{ raid.normal_bosses_killed }} / {{ raid.total_bosses }}</div>
+                                    </div>
+                                </span>
+                                <progress class="progress is-normal" value="{{ raid.normal_bosses_killed }}"
+                                    max="{{ raid.total_bosses }}"></progress>
+                            </div>
+                            <div class="block">
+                                <span>
+                                    <div class="columns">
+                                        <div class="column has-text-left">Heroic</div>
+                                        <div class="column has-text-right">{{ raid.heroic_bosses_killed }} / {{ raid.total_bosses }}</div>
+                                    </div>
+                                </span>
+                                <progress class="progress is-heroic" value="{{ raid.heroic_bosses_killed }}"
+                                    max="{{ raid.total_bosses }}"></progress>
+                            </div>
+                            <div class="block">
+                                <span>
+                                    <div class="columns">
+                                        <div class="column has-text-left">Mythic</div>
+                                        <div class="column has-text-right">{{ raid.mythic_bosses_killed }} / {{ raid.total_bosses }}</div>
+                                    </div>
+                                </span>
+                                <progress class="progress is-mythic" value="{{ raid.mythic_bosses_killed }}"
+                                    max="{{ raid.total_bosses }}"></progress>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        Nie udało nam się pobrać aktualnego progresu ze strony <b>Raider.io</b>.
+        {% endif %}
+    </div>
+</section>
+
+<section>
+    <div id="groups" class="hero is-medium">
+        <div class="container has-text-centered">
+            <div class="hero-body">
+                <h1 class="title">Grupy</h1>
+                <h2 class="subtitle is-6">Oddziały, które niosą Barbarzyńskie sztandary.</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container has-text-centered">
+        {%  if groups %}
+            <div class="columns is-centered">
+            {%  for group in groups %}
+                <div class="column is-one-third" >
+                    <div class="card is-flex" style="height: 100%; flex-direction: column;">
+                        <div class="card-content" style="height: 100%">
+                            <div class="block">
+                                <h1 class="title is-4">{{  group.name }}</h1>
+                            </div>
+                            <div class="block">
+                                {%  for tag in group.tags.all %}
+                                    <tag class="tag">{{  tag.name }}</tag>
+                                {% endfor %}
+                            </div>
+                            <div class="block" style="flex-grow: 1">
+                                <table class="table is-fullwidth">
+                                    <tbody>
+                                        {% for day in group.raid_days.all %}
+                                            <tr>
+                                                <td class="has-text-left">
+                                                    {% if day.is_required %}
+                                                        <b>{{ day.get_day_of_week_display }}</b>
+                                                    {% else %}
+                                                        {{ day.get_day_of_week_display }}
+                                                    {% endif %}
+                                                </td>
+                                                <td class="has-text-right">
+                                                    {{ day.time_start }} - {{ day.time_end }}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-item">
+                                <p><i class="fa-brands fa-discord"></i> {{ group.leader.discord }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        {%  endif %}
+    </div>
+</section>
+
+<section>
+    <div id="recruitment" class="hero is-medium">
+        <div class="container has-text-centered">
+            <div class="hero-body">
+                <h1 class="title">Rekrutacja</h1>
+                <h2 class="subtitle is-6">Dołącz do nas już dziś!</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container has-text-centered">
+        <div class="block">
+            <div class="steps mb-6 pb-6">
+                <div class="step-item">
+                    <div class="step-marker">
+                        <span class="icon">
+                            <i class="fa-solid fa-book"></i>
+                        </span>
+                    </div>
+                    <div class="step-details">
+                        <p class="step-title">Krok 1</p>
+                        <p>Czytamy regulamin</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-marker">
+                        <span class="icon">
+                            <i class="fa-solid fa-list"></i>
+                        </span>
+                    </div>
+                    <div class="step-details">
+                        <p class="step-title">Krok 2</p>
+                        <p>Składamy podanie</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-marker">
+                        <span class="icon">
+                            <i class="fa-solid fa-hourglass"></i>
+                        </span>
+                    </div>
+                    <div class="step-details">
+                        <p class="step-title">Krok 3</p>
+                        <p>Dyskusja z Szamanami</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-marker">
+                        <span class="icon">
+                            <i class="fa-solid fa-message"></i>
+                        </span>
+                    </div>
+                    <div class="step-details">
+                        <p class="step-title">Krok 4</p>
+                        <p>Rozmowa głosowa</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-marker">
+                        <span class="icon">
+                            <i class="fa-solid fa-check"></i>
+                        </span>
+                    </div>
+                    <div class="step-details">
+                        <p class="step-title">Krok 5</p>
+                        <p>Decyzja odnośnie rekrutacji</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="columns has-text-justified">
+            <div class="column is-half">
+                <div class="content">
+                    <h1 class="title is-5">Kim jesteśmy?</h1>
+                    <p>
+                        Barbarzyńcy to gildia, która łączy graczy o różnych zainteresowaniach - czy jesteś "casualem", czy
+                        farmisz osiągnięcia, czy jesteś nastawiony na progres - każdy znajdzie tu miejsce dla siebie. Wspólnie
+                        spędzamy czas na rzeczach najróżniejszych: randomowe instancje, raidy, battlegroundy,
+                        areny, wspólne questy, eventy, achievy - innymi słowy na wszystkim co można robić gildią, by
+                        poznać swoje umiejętności jak i swój charakter. Barbarzyńcy służą także pomocą w questach,
+                        informacją, radą, eliminacją natarczliwego allucha oraz innymi, gdy któryś gildiowicz jest w
+                        potrzebie. Staramy się działać jak rodzina.
+                    </p>
+                </div>
+            </div>
+            <div class="column is-half">
+                <div class="content">
+                    <h1 class="title is-5">Kogo poszukujemy?</h1>
+                    <p>
+                        Dojrzałych emocjonalnie graczy z poczuciem humoru. Jeśli jesteś jednym z tych co zjadł wszystkie
+                        rozumy, jest <b>"elitą"</b> albo masz ochotę kiedykolwiek w jakikolwiek sposób obrażać innych, już
+                        teraz odpuść sobie aplikowanie, bo i tak prędzej czy później zostaniesz usunięty. Ważne jest dla
+                        nas by przestrzegać regulamin - w naszej gildii mamy graczy o różnym wieku i pochodzeniu, a regulamin
+                        został tak skonstruowany, by każdy czuł się u nas dobrze.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="block mt-6">
+            <a class="button is-horde mb-2" style="width: 200px;" href="/regulamin/">
+                <span>Regulamin</span>
+            </a>
+            <a class="button is-horde mb-2" style="width: 200px;" href="{{ discord_auth_link }}">
+                <span>Złóż Podanie</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div id="contact" class="hero is-medium">
+        <div class="container has-text-centered">
+            <div class="hero-body">
+                <h1 class="title">Kontakt</h1>
+                <h2 class="subtitle is-6">Osoby kontaktowe w razie dalszych pytań.</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="columns is-multiline">
+            {% for person in contact %}
+            <column class="column is-one-fifth">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-64x64">
+                                    {% if person.wow_image %}
+                                    <img class="is-rounded" src="{{ person.wow_image }}" alt="{{ person.name }}">
+                                    {% else %}
+                                    <img class="is-rounded" src="{% static 'img/contact.jpeg' %}"
+                                        alt="{{ person.name }}">
+                                    {% endif %}
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-6">{{ person.name }}</p>
+                                <p class="subtitle is-7 mb-3">{{ person.rank }}</p>
+                                <p class="subtitle is-7"><i class="fa-brands fa-discord"></i> {{ person.discord }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </column>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

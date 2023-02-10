@@ -1,0 +1,41 @@
+version: "3.7"
+
+x-base: &base
+  image: barbarzyncy
+  volumes:
+    - .:/project/app
+    - static:/project/static
+    - media:/project/media
+  env_file: .env
+  depends_on:
+    - mysql
+
+services:
+  mysql:
+    image: mariadb
+    environment:
+      - MARIADB_ROOT=root
+      - MARIADB_ROOT_PASSWORD=root
+      - MARIADB_DATABASE=barbarzyncy
+  
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
+
+  django:
+    <<: *base
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    command: runserver
+    ports:
+      - "8000:8000"
+
+  bootstrap:
+    <<: *base
+    command: manage bootstrap
+
+volumes:
+  static:
+  media:

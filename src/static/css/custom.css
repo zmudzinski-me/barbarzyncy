@@ -1,0 +1,24 @@
+img {
+    object-fit: cover;
+}
+
+.navbar .navbar-end {
+    text-align: right;
+    display: block;
+    width: 100%;
+}
+
+.navbar-item {
+    margin-top: 6px;
+}
+
+.navbar .navbar-end > .navbar-item,
+.navbar .navbar-end .navbar-link {
+    display: inline-block;
+}
+
+@media screen and (max-width:769px) {
+    .container {
+        padding: 2em;
+    }
+}

@@ -1,0 +1,81 @@
+{% extends "core/base.html" %}
+{% load lookup %}
+
+{% block content %}
+<nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
+    <div class="container mt-6 mb-6">
+        <ul>
+            <li>
+                <a href="{{ site_url }}">
+                    <span class="icon is-small">
+                        <i class="fas fa-home" aria-hidden="true"></i>
+                    </span>
+                    <span>Barbarzyńcy</span>
+                </a>
+            </li>
+            <li class="is-active"><a href="#" aria-current="page">Rekrutacja</a></li>
+        </ul>
+    </div>
+</nav>
+<section>
+    <div id="progress" class="hero is-medium">
+        <div class="container is-max-desktop has-text-centered">
+            <div class="hero-body">
+                <h1 class="title">Rekrutacja {{ recruitment_type | upper }}</h1>
+                <h2 class="subtitle is-6">Upewnij się, że przeczytałeś/aś Regulamin zanim podejdziesz do rekrutacji.
+                </h2>
+                <p>
+                    Każda osoba, która chciałaby dołączyć do naszej gildii powinna się zastanowić czy na pewno tego
+                    chce.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% if error %}
+<section>
+    <div class="container is-max-desktop">
+        <article class="message is-danger is-small">
+            <div class="message-body">
+                {{ error }}
+            </div>
+        </article>
+    </div>
+</section>
+{% endif %}
+<div class="section">
+    <div class="container is-max-desktop">
+        <form method="post" action="">
+            {% csrf_token %}
+            {% for question in questions %}
+            <div class="field mb-6">
+                <div class="control">
+                    {% if question.input_type == "radio" %}
+                    <label class="label">{{ question.content }}</label>
+                    <label class="radio">
+                        <input type="radio" value="Tak" name="{{ question.id }}" required>
+                        Tak
+                    </label>
+                    <label class="radio">
+                        <input type="radio" value="Nie" name="{{ question.id }}" required>
+                        Nie
+                    </label>
+                    {% elif question.input_type == "multiline" %}
+                    <label class="label">{{ question.content }}</label>
+                    <textarea name="{{ question.id }}" class="textarea"  maxlength="800" required>{{ answers|lookup:question.id }}</textarea>
+                    {% else %}
+                    <label class="label">{{ question.content }}</label>
+                    <input name="{{ question.id }}" class="input" type="text" maxlength="800" value="{{ answers|lookup:question.id }}" required>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="field">
+                <p class="control">
+                    <input type="submit" class="button is-horde" value="Wyślij Podanie">
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

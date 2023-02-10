@@ -1,0 +1,76 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
+        <div class="container mt-6 mb-6">
+            <ul>
+                <li>
+                    <a href="{{ site_url }}">
+                        <span class="icon is-small">
+                            <i class="fas fa-home" aria-hidden="true"></i>
+                        </span>
+                        <span>Barbarzyńcy</span>
+                    </a>
+                </li>
+                <li class="is-active">
+                    <a href="{{ site_url }}/blog/">
+                        <span class="icon is-small">
+                            <i class="fas fa-book" aria-hidden="true"></i>
+                        </span>
+                        <span>Blog</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <section>
+        <div class="container has-text-centered">
+            <div class="hero is-medium mt-6">
+
+                <div class="hero-body">
+                    <h1 class="title">Aktualności</h1>
+                    <h2 class="subtitle is-6">Co u Barbarzyńców piszczy...</h2>
+                </div>
+            </div>
+    </section>
+    <section>
+        <div class="container has-text-centered">
+            <div class="columns is-centered  has-text-centered is-multiline">
+                {% for post in object_list %}
+                    <div class="column is-one-third">
+                        <a href="/blog/{{ post.id }}/">
+                            <div class="card" style="height: 100%;">
+                                <div class="card-image">
+                                    <figure class="image">
+                                        <img src="{{ post.image.url }}"  style="height: 250px">
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <div class="block has-text-centered">
+                                        <h1 class="title is-5">{{ post.title }}</h1>
+                                        <h2 class="subtitle is-6">{{  post.published_at|date:"d E Y" }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {%  endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="mt-6">
+        <div class="container">
+            <nav class="pagination is-left" role="navigation" aria-label="pagination">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" class="pagination-previous button is-horde">Poprzednie</a>
+                {% endif %}
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="pagination-next button is-horde">Następne</a>
+                {% endif %}
+                <ul class="pagination-list">
+                    <li>Strona {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}</li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+{% endblock %}

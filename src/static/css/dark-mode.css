@@ -1,0 +1,185 @@
+html {
+    background-color: #171717;
+}
+
+.bottom-shadow {
+    box-shadow: 0 2em 2em black !important;
+}
+
+.title, .subtitle {
+    color: #EDEDED !important;
+}
+
+.card {
+    background-color: #1c1a1a;
+    color: #EDEDED;
+}
+
+.card-footer-item:not(:last-child) {
+    border-right: 1px solid #4A4A4A;
+}
+
+.card-footer {
+    background-color: transparent;
+    border-top: 1px solid #4A4A4A;
+    align-items: stretch;
+    display: flex;
+}
+
+.navbar {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.navbar-menu {
+    background-color: transparent;
+    box-shadow: 0;
+}
+
+.navbar-item {
+    color: #8C1616;
+}
+
+.breadcrumb a {
+    color: #8C1616 !important;
+}
+
+.post a {
+    color: #8C1616 !important;
+}
+
+.navbar-burger {
+    color: #8C1616 !important;
+}
+
+.navbar-item:hover {
+    background-color: transparent !important;
+    color: #EDEDED !important;
+}
+
+.progress::-webkit-progress-bar {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+  
+.progress.is-normal::-webkit-progress-value {
+    background-color: #0070DD;
+}
+
+.progress.is-normal::-moz-progress-bar {
+    background-color: #0070DD;
+}
+
+.progress.is-normal::-ms-fill {
+    background-color: #0070DD;
+    border: none;
+}
+
+.progress.is-heroic::-webkit-progress-value {
+    background-color: #A335EE;
+}
+
+.progress.is-heroic::-moz-progress-bar {
+    background-color: #A335EE;
+}
+
+.progress.is-heroic::-ms-fill {
+    background-color: #A335EE;
+    border: none;
+}
+
+.progress.is-mythic::-webkit-progress-value {
+    background-color: #FF8000;
+}
+
+.progress.is-mythic::-moz-progress-bar {
+    background-color: #FF8000;
+}
+
+.progress.is-mythic::-ms-fill {
+    background-color: #FF8000;
+    border: none;
+}
+
+.table {
+    background-color: #1c1a1a;
+    color: #EDEDED;
+}
+
+.table strong {
+    color: #EDEDED;
+}
+
+.table td,
+.table th {
+  border: 1px solid #4A4A4A;
+  border-width: 0 0 1px;
+  padding: 0.5em 0.75em;
+  vertical-align: top;
+}
+
+.tag:not(body).is-horde {
+    background-color: #8C1616;
+    color: #EDEDED;
+}
+
+.button.is-horde {
+    background-color: #8C1616;
+    border-color: transparent;
+    color: #EDEDED;
+}
+
+.content {
+    color: #EDEDED;
+}
+
+.steps .step-item .step-marker{
+    -webkit-box-align:center;
+    -ms-flex-align:center;
+    align-items:center;
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    border-radius:50%;
+    font-weight:700;
+    -webkit-box-pack:center;
+    -ms-flex-pack:center;
+    justify-content:center;
+    background:#1c1a1a;
+    color: #EDEDED;
+    border: .2em solid #1c1a1a;
+    z-index: 1
+}
+
+.steps .step-item::before {
+    background: #1c1a1a;
+    background-size: 200% 100%;
+    background-position:right bottom
+}
+
+.steps .step-title {
+    color: #EDEDED;
+}
+
+/* CONTENT COLORS */
+.content strong {
+    color: white;
+}
+
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+    color: #8C1616;
+}
+
+.label {
+    color: #8C1616;
+}
+
+/* FORM COLORS */
+
+.radio {
+    color: white;
+}
+
+.textarea, .input {
+    background-color: #4a4a4a;
+    border-color: #4a4a4a;
+    color: white;
+}

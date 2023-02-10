@@ -1,0 +1,41 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
+    <div class="container mt-6 mb-6">
+        <ul>
+            <li>
+                <a href="{{ site_url }}">
+                    <span class="icon is-small">
+                        <i class="fas fa-home" aria-hidden="true"></i>
+                    </span>
+                    <span>Barbarzyńcy</span>
+                </a>
+            </li>
+            <li class="is-active"><a href="#" aria-current="page">Rekrutacja</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section>
+    <div id="progress" class="hero is-medium">
+        <div class="container is-max-desktop has-text-centered">
+            <div class="hero-body">
+                <h1 class="title">🎉 Podanie złożone! Powodzenia!</h1>
+                <h2 class="subtitle is-6">Dalszy proces rekrutacji możesz śledzić na naszym discordzie.</h2>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container is-max-desktop has-text-centered">
+        <a href="{{ discord_url }}" class="button is-horde">
+            <span class="icon">
+                <i class="fa-brands fa-discord"></i>
+            </span>
+            <span>Przejdź do Discord</span>
+        </a>
+    </div>
+</section>
+{% endblock %}

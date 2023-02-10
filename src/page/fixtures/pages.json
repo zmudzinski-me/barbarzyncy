@@ -1,0 +1,24 @@
+[
+  {
+    "model": "page.page",
+    "pk": "4b089475-d07a-4f1a-99a1-dca9c56f16f9",
+    "fields": {
+      "title": "404",
+      "slug": "404",
+      "content": "",
+      "created_at": "2022-04-11T07:45:20.745Z",
+      "updated_at": "2022-04-11T15:43:39.723Z"
+    }
+  },
+  {
+    "model": "page.page",
+    "pk": "dc85c8f4-9a2c-4b74-8993-5fbc9976cda1",
+    "fields": {
+      "title": "Regulamin",
+      "slug": "regulamin",
+      "content": "",
+      "created_at": "2022-04-08T13:59:15.336Z",
+      "updated_at": "2022-04-11T15:43:30.609Z"
+    }
+  }
+]

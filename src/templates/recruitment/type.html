@@ -1,0 +1,71 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+<nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
+    <div class="container mt-6 mb-6">
+        <ul>
+            <li>
+                <a href="{{ site_url }}">
+                    <span class="icon is-small">
+                        <i class="fas fa-home" aria-hidden="true"></i>
+                    </span>
+                    <span>Barbarzyńcy</span>
+                </a>
+            </li>
+            <li class="is-active"><a href="#" aria-current="page">Rekrutacja</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section>
+    <div id="progress" class="hero is-medium">
+        <div class="container is-max-desktop has-text-centered">
+            <div class="hero-body">
+                <h1 class="title">Typ podania</h1>
+                <h2 class="subtitle is-6">Proszę wybierz typ podania, które Cię interesuje.</h2>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-half">
+                <a href="/rekrutacja/casual/?code={{ code }}">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image">
+                                <img src="{% static '/img/casual.png' %}"  style="height: 250px">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="block has-text-centered">
+                                <h1 class="title is-5">CASUAL</h1>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="column is-half">
+                <a href="/rekrutacja/pve/?code={{ code }}">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image">
+                                <img src="{% static '/img/pve.png' %}"  style="height: 250px">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="block has-text-centered">
+                                <h1 class="title is-5">PVE</h1>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
