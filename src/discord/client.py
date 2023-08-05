@@ -152,7 +152,10 @@ class DiscordClient:
         response_json = response.json()
 
         user_id = response_json["id"]
-        user_name = f"{response_json['username']}#{response_json['discriminator']}"
+        user_name = response_json["username"]
+        if discriminator := response_json.get("discriminator"):
+            user_name = f"{user_name}#{discriminator}"
+
         return user_id, user_name
 
     @classmethod
