@@ -9,7 +9,7 @@ The project contains Django code for the Barbarzyńcy World of Warcraft guild lo
   - Blog and news
   - `Raider.io` progress
   - Guild raiding / pvp groups
-  - Recruitment connected with `Discord``
+  - Recruitment connected with `Discord`
   - `BlizzardAPI` connection for character information
 
 ## Requirements
