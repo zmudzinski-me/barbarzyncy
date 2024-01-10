@@ -1,4 +1,4 @@
-![License](https://img.shields.io/github/license/lukzmu/barbarzyncy)
+![License](https://img.shields.io/github/license/divinebanana/barbarzyncy)
 
 # Barbarzyncy Website
 
